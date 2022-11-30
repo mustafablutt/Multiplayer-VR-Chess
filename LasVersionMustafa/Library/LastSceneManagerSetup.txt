@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/VR ChessMovement/Scenes/pieceMovementTest.unity
-  isLoaded: 1
-  isActive: 1
