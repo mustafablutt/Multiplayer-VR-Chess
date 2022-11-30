@@ -1486,14 +1486,14 @@ MonoBehaviour:
   tileMaterial: {fileID: 0}
   tileSize: 1
   yOffset: 0.1
-  boardCenter: {x: -0.1, y: 0.2, z: -3.7}
+  boardCenter: {x: -0.1, y: 0.3, z: -3.7}
   prefabs:
   - {fileID: 96333189583187371, guid: 074d5481b9af5fb4b9e9d6424fabd5df, type: 3}
-  - {fileID: 6284318607752492374, guid: bb51d3527e9941a44a9e66f05b069399, type: 3}
-  - {fileID: 1692500877171189130, guid: 1286138404036ff43bc3ee0f9b1b5301, type: 3}
-  - {fileID: 2627343592357364059, guid: 831ca3c5290cf484a9183b35bf8ae30b, type: 3}
-  - {fileID: 5155416965404237286, guid: b722cb2d6b92a7f4d8443f4c4df8ef19, type: 3}
-  - {fileID: 6470225487041920106, guid: 502583602fd91454ba96a609b6dc59f5, type: 3}
+  - {fileID: 8637307166200258964, guid: bb51d3527e9941a44a9e66f05b069399, type: 3}
+  - {fileID: 1217435863388047702, guid: 1286138404036ff43bc3ee0f9b1b5301, type: 3}
+  - {fileID: 4448554203394204406, guid: 831ca3c5290cf484a9183b35bf8ae30b, type: 3}
+  - {fileID: 2116012581158845998, guid: b722cb2d6b92a7f4d8443f4c4df8ef19, type: 3}
+  - {fileID: 6816576287988542185, guid: 502583602fd91454ba96a609b6dc59f5, type: 3}
   teamMaterials:
   - {fileID: 2100000, guid: 12c90d384f34e2a43838c746fd179980, type: 2}
   - {fileID: 2100000, guid: 8b46cf510ef44e242b578d95e49abde3, type: 2}

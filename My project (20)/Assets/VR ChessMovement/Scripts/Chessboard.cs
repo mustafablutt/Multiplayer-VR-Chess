@@ -55,32 +55,14 @@ public class Chessboard : MonoBehaviour
     {
         GameObject tileObject = new GameObject(string.Format("X:{0}, Y:{1}", x, y));
         tileObject.transform.parent = transform;
-        ChessSquare cs1 = new ChessSquare();
-        PointerFunctions pf1 = new PointerFunctions();
+       
 
 
         Mesh mesh = new Mesh();
         tileObject.AddComponent<MeshFilter>().mesh = mesh;
         tileObject.AddComponent<MeshRenderer>().material = tileMaterial;
 
-        tileObject.AddComponent<PointerFunctions>().Equals(pf1);
-        tileObject.AddComponent<ChessSquare>().Equals(cs1);
-       
-
-        if (tileObject.GetComponent<EventTrigger>() == null)
-        {
-            tileObject.AddComponent<EventTrigger>();
-        }
-        EventTrigger trigger = tileObject.GetComponentInParent<EventTrigger>();
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-       
-        entry.eventID = EventTriggerType.PointerEnter;
-       
-    
-
-        entry.callback.AddListener((PointerEnter) => { cs1.onOverSquare(); });
-        
-        trigger.triggers.Add(entry);
+     
        
 
        
