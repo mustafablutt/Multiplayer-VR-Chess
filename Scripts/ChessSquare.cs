@@ -1,57 +1,60 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChessSquare : MonoBehaviour {
+public abstract class ChessSquare : MonoBehaviour
+{
 
-	// Use this for initialization
-	// this it the scrpt that manages the piece movement
-	PieceMovement piecemovScript;
-	// this is the over material used when focusing on the square
-	public Material overMat;
-	// the origignal material of the squate
-	Material origMat;
-	// pointer functions is used to call the pepare to click
-	PointerFunctions pointerF;
+    // Use this for initialization
+    // this it the scrpt that manages the piece movement
+    PieceMovement piecemovScript;
+    // this is the over material used when focusing on the square
+    public Material overMat;
+    // the origignal material of the squate
+    Material origMat;
+    // pointer functions is used to call the pepare to click
+    PointerFunctions pointerF;
 
-	void Start ()
-	{
-		piecemovScript=GameObject.FindGameObjectWithTag("pieceMovement").GetComponent<PieceMovement>();
-		pointerF=GetComponent<PointerFunctions>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    protected virtual void Start()
+    {
+        piecemovScript = GameObject.FindGameObjectWithTag("pieceMovement").GetComponent<PieceMovement>();
+        pointerF = GetComponent<PointerFunctions>();
+    }
 
-	//this function is trigger on the onOver() trigger event
-	public void onOverSquare ()
-	{
-		origMat=gameObject.GetComponent<Renderer>().material;
-		if (piecemovScript.selectedGo != null) {
+    // Update is called once per frame
+    void Update()
+    {
 
-			// pawn movement is 1 distance forth
-			if (piecemovScript.selectedGo.tag == "pawn") 
-			{
-				//this are the two points that mus be compared
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
+    }
 
-				//Debug.Log("overSquare dist = "+dist[1]);
-				//only advance forward
-				if (dist.magnitude < 1.05f && dist.magnitude > 0.95f && dist[1]>0)
-				{
-					gameObject.GetComponent<Renderer>().material=overMat;
+    //this function is trigger on the onOver() trigger event
+    public void onOverSquare()
+    {
+        origMat = gameObject.GetComponent<Renderer>().material;
+        if (piecemovScript.selectedGo != null)
+        {
 
-					// get loading bar working
-					pointerF.onGazeOver();
-				}
-			}
+            // pawn movement is 1 distance forth
+            if (piecemovScript.selectedGo.tag == "pawn")
+            {
+                //this are the two points that mus be compared
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
+
+                //Debug.Log("overSquare dist = "+dist[1]);
+                //only advance forward
+                if (dist.magnitude < 1.05f && dist.magnitude > 0.95f && dist[1] > 0)
+                {
+                    gameObject.GetComponent<Renderer>().material = overMat;
+
+                    // get loading bar working
+                    pointerF.onGazeOver();
+                }
+            }
 
             if (piecemovScript.selectedGo.tag == "blackpawn")
             {
-				
+
                 //this are the two points that mus be compared
                 Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
                 Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
@@ -69,23 +72,23 @@ public class ChessSquare : MonoBehaviour {
             }
 
             // knight movement is L shaped  square(5) distance in any direction
-            if (piecemovScript.selectedGo.tag == "knight") 
-			{
-				//this are the two points that mus be compared
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
+            if (piecemovScript.selectedGo.tag == "knight")
+            {
+                //this are the two points that mus be compared
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
 
-				//Debug.Log("overSquare dist = "+dist[1]);
-				//only advance forward
-				if (dist.magnitude < Mathf.Sqrt(5)+ 0.01 && dist.magnitude > Mathf.Sqrt(5)- 0.01 )
-				{
-					gameObject.GetComponent<Renderer>().material=overMat;
+                //Debug.Log("overSquare dist = "+dist[1]);
+                //only advance forward
+                if (dist.magnitude < Mathf.Sqrt(5) + 0.1 && dist.magnitude > Mathf.Sqrt(5) - 0.1)
+                {
+                    gameObject.GetComponent<Renderer>().material = overMat;
 
-					// get loading bar working
-					pointerF.onGazeOver();
-				}
-			}
+                    // get loading bar working
+                    pointerF.onGazeOver();
+                }
+            }
 
             if (piecemovScript.selectedGo.tag == "blackknight")
             {
@@ -106,22 +109,22 @@ public class ChessSquare : MonoBehaviour {
             }
 
             // bishop movement is "diagonal" shaped in any direction
-            if (piecemovScript.selectedGo.tag == "bishop") 
-			{
-				//this are the two points that mus be compared
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
+            if (piecemovScript.selectedGo.tag == "bishop")
+            {
+                //this are the two points that mus be compared
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
 
-				// diagonal means that the two components of the vector must be the same
-				if ( Mathf.Abs(dist[1]-dist[0])<0.01f ||  Mathf.Abs(dist[1]+dist[0])<0.01f)
-				{
-					gameObject.GetComponent<Renderer>().material=overMat;
+                // diagonal means that the two components of the vector must be the same
+                if (Mathf.Abs(dist[1] - dist[0]) < 0.1f || Mathf.Abs(dist[1] + dist[0]) < 0.1f)
+                {
+                    gameObject.GetComponent<Renderer>().material = overMat;
 
-					// get loading bar working
-					pointerF.onGazeOver();
-				}
-			}
+                    // get loading bar working
+                    pointerF.onGazeOver();
+                }
+            }
 
             if (piecemovScript.selectedGo.tag == "blackbishop")
             {
@@ -142,23 +145,23 @@ public class ChessSquare : MonoBehaviour {
 
 
             // tower movement is "linear" shaped in any direction
-            if (piecemovScript.selectedGo.tag == "rook") 
-			{
-				//this are the two points that mus be compared
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
+            if (piecemovScript.selectedGo.tag == "rook")
+            {
+                //this are the two points that mus be compared
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
 
-				//Debug.Log("overSquare dist = "+dist[1]);
-				//only advance in linear wat (one component is equal to zero)
-				if (Mathf.Abs(dist[1])<0.01f ||  Mathf.Abs(dist[0])<0.01f)
-				{
-					gameObject.GetComponent<Renderer>().material=overMat;
+                //Debug.Log("overSquare dist = "+dist[1]);
+                //only advance in linear wat (one component is equal to zero)
+                if (Mathf.Abs(dist[1]) < 0.1f || Mathf.Abs(dist[0]) < 0.1f)
+                {
+                    gameObject.GetComponent<Renderer>().material = overMat;
 
-					// get loading bar working
-					pointerF.onGazeOver();
-				}
-			}
+                    // get loading bar working
+                    pointerF.onGazeOver();
+                }
+            }
             if (piecemovScript.selectedGo.tag == "blackrook")
             {
                 //this are the two points that mus be compared
@@ -178,25 +181,25 @@ public class ChessSquare : MonoBehaviour {
             }
 
             // king movement is "linear and diagonar" shaped in any direction only 1 square
-            if (piecemovScript.selectedGo.tag == "king") 
-			{
-				//this are the two points that mus be compared
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
+            if (piecemovScript.selectedGo.tag == "king")
+            {
+                //this are the two points that mus be compared
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
 
-				//Debug.Log("overSquare dist = "+dist[1]);
-				//only advance forward
-				if (   dist.magnitude > 1- 0.01 && dist.magnitude < 1 + 0.01
-					|| dist.magnitude > Mathf.Sqrt(2)- 0.01 && dist.magnitude < Mathf.Sqrt(2) + 0.01
-					)
-				{
-					gameObject.GetComponent<Renderer>().material=overMat;
+                //Debug.Log("overSquare dist = "+dist[1]);
+                //only advance forward
+                if (dist.magnitude > 1 - 0.1 && dist.magnitude < 1 + 0.1
+                    || dist.magnitude > Mathf.Sqrt(2) - 0.1 && dist.magnitude < Mathf.Sqrt(2) + 0.1
+                    )
+                {
+                    gameObject.GetComponent<Renderer>().material = overMat;
 
-					// get loading bar working
-					pointerF.onGazeOver();
-				}
-			}
+                    // get loading bar working
+                    pointerF.onGazeOver();
+                }
+            }
 
             if (piecemovScript.selectedGo.tag == "blackking")
             {
@@ -204,7 +207,7 @@ public class ChessSquare : MonoBehaviour {
                 Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
                 Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
                 Vector2 dist = (pos2 - pos1);
-                
+
 
                 //Debug.Log("overSquare dist = "+dist[1]);
                 //only advance forward
@@ -220,26 +223,26 @@ public class ChessSquare : MonoBehaviour {
             }
 
             // queen movement is "diagonal and linear" shaped in any direction and any number of squares (max 8)
-            if (piecemovScript.selectedGo.tag == "queen") 
-			{
-				//this are the two points that mus be compared
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
-				
+            if (piecemovScript.selectedGo.tag == "queen")
+            {
+                //this are the two points that mus be compared
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
 
-				//Debug.Log("overSquare dist = "+dist[1]);
-				//only advance forward
-				if ( Mathf.Abs(dist[1])<0.01f ||  Mathf.Abs(dist[0])<0.01f 
-					|| Mathf.Abs(dist[1]-dist[0])<0.01f ||  Mathf.Abs(dist[1]+dist[0])<0.01f
-					)
-				{
-					gameObject.GetComponent<Renderer>().material=overMat;
 
-					// get loading bar working
-					pointerF.onGazeOver();
-				}
-			}
+                //Debug.Log("overSquare dist = "+dist[1]);
+                //only advance forward
+                if (Mathf.Abs(dist[1]) < 0.1f || Mathf.Abs(dist[0]) < 0.1f
+                    || Mathf.Abs(dist[1] - dist[0]) < 0.01f || Mathf.Abs(dist[1] + dist[0]) < 0.01f
+                    )
+                {
+                    gameObject.GetComponent<Renderer>().material = overMat;
+
+                    // get loading bar working
+                    pointerF.onGazeOver();
+                }
+            }
 
             if (piecemovScript.selectedGo.tag == "blackqueen")
             {
@@ -262,37 +265,38 @@ public class ChessSquare : MonoBehaviour {
                 }
             }
         }
-	}
+    }
 
 
 
 
 
 
-	//*****************
-	// similar structure that the on over, but with call to the movement function in this case
-	//*******************
-	public void onClickSquare ()
-	{
-		if (piecemovScript.selectedGo != null) {
+    //*****************
+    // similar structure that the on over, but with call to the movement function in this case
+    //*******************
+    public void onClickSquare()
+    {
+        if (piecemovScript.selectedGo != null)
+        {
 
-			// pawn movement is 1 distance forth
-			if (piecemovScript.selectedGo.tag == "pawn") 
-			{
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
+            // pawn movement is 1 distance forth
+            if (piecemovScript.selectedGo.tag == "pawn")
+            {
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
 
-				//Debug.Log("overSquare dist = "+dist);
-				//only advance forward
-				if (dist.magnitude < 1.05f && dist.magnitude > 0.95f && dist[1]>0)
-				{
-					//Debug.Log("call movement");
-					piecemovScript.movePiece(gameObject);
-				}
+                //Debug.Log("overSquare dist = "+dist);
+                //only advance forward
+                if (dist.magnitude < 1.05f && dist.magnitude > 0.95f && dist[1] > 0)
+                {
+                    //Debug.Log("call movement");
+                    piecemovScript.movePiece(gameObject);
+                }
 
 
-			}
+            }
 
             if (piecemovScript.selectedGo.tag == "blackpawn")
             {
@@ -315,20 +319,20 @@ public class ChessSquare : MonoBehaviour {
 
 
             // knight movement is L shaped  square(5) distance in any direction
-            if (piecemovScript.selectedGo.tag == "knight") 
-			{
-				//this are the two points that mus be compared
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
+            if (piecemovScript.selectedGo.tag == "knight")
+            {
+                //this are the two points that mus be compared
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
 
-				//Debug.Log("overSquare dist = "+dist[1]);
-				//only advance forward
-				if (dist.magnitude < Mathf.Sqrt(5)+ 0.01 && dist.magnitude > Mathf.Sqrt(5)- 0.01 )
-				{
-					piecemovScript.movePiece(gameObject);
-				}
-			}
+                //Debug.Log("overSquare dist = "+dist[1]);
+                //only advance forward
+                if (dist.magnitude < Mathf.Sqrt(5) + 0.1 && dist.magnitude > Mathf.Sqrt(5) - 0.1)
+                {
+                    piecemovScript.movePiece(gameObject);
+                }
+            }
             if (piecemovScript.selectedGo.tag == "blackknight")
             {
                 //this are the two points that mus be compared
@@ -345,20 +349,20 @@ public class ChessSquare : MonoBehaviour {
             }
 
             // bishop movement is "diagonal" shaped in any direction
-            if (piecemovScript.selectedGo.tag == "bishop") 
-			{
-				//this are the two points that mus be compared
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
+            if (piecemovScript.selectedGo.tag == "bishop")
+            {
+                //this are the two points that mus be compared
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
 
-				//Debug.Log("overSquare dist = "+dist[1]);
-				//only advance forward
-				if ( Mathf.Abs(dist[1]-dist[0])<0.01f ||  Mathf.Abs(dist[1]+dist[0])<0.01f)
-				{
-					piecemovScript.movePiece(gameObject);
-				}
-			}
+                //Debug.Log("overSquare dist = "+dist[1]);
+                //only advance forward
+                if (Mathf.Abs(dist[1] - dist[0]) < 0.1f || Mathf.Abs(dist[1] + dist[0]) < 0.1f)
+                {
+                    piecemovScript.movePiece(gameObject);
+                }
+            }
 
             if (piecemovScript.selectedGo.tag == "blackbishop")
             {
@@ -377,20 +381,20 @@ public class ChessSquare : MonoBehaviour {
 
 
             // tower movement is "linear" shaped in any direction
-            if (piecemovScript.selectedGo.tag == "rook") 
-			{
-				//this are the two points that mus be compared
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
+            if (piecemovScript.selectedGo.tag == "rook")
+            {
+                //this are the two points that mus be compared
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
 
-				//Debug.Log("overSquare dist = "+dist[1]);
-				//only advance in linear wat (one component is equal to zero)
-				if (Mathf.Abs(dist[1])<0.01f ||  Mathf.Abs(dist[0])<0.01f )
-				{
-					piecemovScript.movePiece(gameObject);
-				}
-			}
+                //Debug.Log("overSquare dist = "+dist[1]);
+                //only advance in linear wat (one component is equal to zero)
+                if (Mathf.Abs(dist[1]) < 0.1f || Mathf.Abs(dist[0]) < 0.1f)
+                {
+                    piecemovScript.movePiece(gameObject);
+                }
+            }
 
             if (piecemovScript.selectedGo.tag == "blackrook")
             {
@@ -401,7 +405,7 @@ public class ChessSquare : MonoBehaviour {
 
                 //Debug.Log("overSquare dist = "+dist[1]);
                 //only advance in linear wat (one component is equal to zero)
-                if (Mathf.Abs(dist[1]) < 0.01f || Mathf.Abs(dist[0]) < 0.01f)
+                if (Mathf.Abs(dist[1]) < 0.1f || Mathf.Abs(dist[0]) < 0.1f)
                 {
                     piecemovScript.movePiece(gameObject);
                 }
@@ -409,22 +413,22 @@ public class ChessSquare : MonoBehaviour {
 
 
             // king movement is "linear and diagonar" shaped in any direction only 1 square
-            if (piecemovScript.selectedGo.tag == "king") 
-			{
-				//this are the two points that mus be compared
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
+            if (piecemovScript.selectedGo.tag == "king")
+            {
+                //this are the two points that mus be compared
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
 
-				//Debug.Log("overSquare dist = "+dist[1]);
-				//only advance forward
-				if (   dist.magnitude > 1- 0.01 && dist.magnitude < 1 + 0.01
-					|| dist.magnitude > Mathf.Sqrt(2)- 0.01 && dist.magnitude < Mathf.Sqrt(2) + 0.01
-					)
-				{
-					piecemovScript.movePiece(gameObject);
-				}
-			}
+                //Debug.Log("overSquare dist = "+dist[1]);
+                //only advance forward
+                if (dist.magnitude > 1 - 0.1 && dist.magnitude < 1 + 0.1
+                    || dist.magnitude > Mathf.Sqrt(2) - 0.1 && dist.magnitude < Mathf.Sqrt(2) + 0.1
+                    )
+                {
+                    piecemovScript.movePiece(gameObject);
+                }
+            }
 
             if (piecemovScript.selectedGo.tag == "blackking")
             {
@@ -445,22 +449,22 @@ public class ChessSquare : MonoBehaviour {
 
 
             // queen movement is "diagonal and linear" shaped in any direction and any number of squares (max 8)
-            if (piecemovScript.selectedGo.tag == "queen") 
-			{
-				//this are the two points that mus be compared
-				Vector2 pos1=new Vector2(piecemovScript.selectedGo.transform.position[0],piecemovScript.selectedGo.transform.position[2]);
-				Vector2 pos2=new Vector2(gameObject.transform.position[0],gameObject.transform.position[2]);
-				Vector2 dist = ( pos2- pos1);
+            if (piecemovScript.selectedGo.tag == "queen")
+            {
+                //this are the two points that mus be compared
+                Vector2 pos1 = new Vector2(piecemovScript.selectedGo.transform.position[0], piecemovScript.selectedGo.transform.position[2]);
+                Vector2 pos2 = new Vector2(gameObject.transform.position[0], gameObject.transform.position[2]);
+                Vector2 dist = (pos2 - pos1);
 
-				//Debug.Log("overSquare dist = "+dist[1]);
-				// it advances like a bishop + tower
-				if (Mathf.Abs(dist[1])<0.01f ||  Mathf.Abs(dist[0])<0.01f 
-					|| Mathf.Abs(dist[1]-dist[0])<0.01f ||  Mathf.Abs(dist[1]+dist[0])<0.01f
-					)
-				{
-					piecemovScript.movePiece(gameObject);
-				}
-			}
+                //Debug.Log("overSquare dist = "+dist[1]);
+                // it advances like a bishop + tower
+                if (Mathf.Abs(dist[1]) < 0.1f || Mathf.Abs(dist[0]) < 0.1f
+                    || Mathf.Abs(dist[1] - dist[0]) < 0.1f || Mathf.Abs(dist[1] + dist[0]) < 0.1f
+                    )
+                {
+                    piecemovScript.movePiece(gameObject);
+                }
+            }
 
             if (piecemovScript.selectedGo.tag == "blackqueen")
             {
@@ -479,10 +483,16 @@ public class ChessSquare : MonoBehaviour {
                 }
             }
         }
-	}
+    }
 
-	public void onExitSquare ()
-	{
-		gameObject.GetComponent<Renderer> ().material = origMat;
-	}
+    public void onExitSquare()
+    {
+        gameObject.GetComponent<Renderer>().material = origMat;
+    }
+
+    public abstract void onMultiplayerOverSquare();
+    public abstract void onMultiplayerClickSquare();
+    public abstract void onMultiplayerExitSquare();
+
+
 }

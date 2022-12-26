@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Photon.Pun;
+using System.ComponentModel;
+using System.Collections.Generic;
 
-public class PieceMovement : MonoBehaviour
+public abstract class PieceMovement : MonoBehaviour
 {
 
     // Use this for initialization
@@ -16,7 +19,7 @@ public class PieceMovement : MonoBehaviour
     public Collision col;
     public Vector3 lastPosition;
 
-    void Start()
+    protected virtual void Start()
     {
 
     }
@@ -34,7 +37,7 @@ public class PieceMovement : MonoBehaviour
 
     }
 
-    IEnumerator moveToObjective(Vector3 position)
+    public IEnumerator moveToObjective(Vector3 position)
     {
         float elapsed = 0;
         position += new Vector3(0, 0, 0);
@@ -47,7 +50,7 @@ public class PieceMovement : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
-        Debug.Log("fsdfsd" + colObject.transform.GetComponent<ChessPiece>().team + selectedGo.transform.GetComponent<ChessPiece>().team);
+        Debug.Log("fsdfsd" + colObject.GetComponent<ChessPiece>().team + selectedGo.GetComponent<ChessPiece>().team);
 
         if (thereIsCollision == true && colObject.transform.GetComponent<ChessPiece>().team == selectedGo.transform.GetComponent<ChessPiece>().team)
         {
@@ -106,11 +109,16 @@ public class PieceMovement : MonoBehaviour
             selectedGo = null;
             Debug.Log("5");
         }
+    
 
 
 
 
 
+}
 
-    }
+    public abstract void SelectedPieceMoved(GameObject groundPoint);
+    public abstract void MultiMovetoObjective(Vector3 position);
+
+
 }

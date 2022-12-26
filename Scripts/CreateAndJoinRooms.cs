@@ -9,22 +9,27 @@ using Photon.Pun;
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
 
-
+    public static bool black = false;
 
     public InputField createInput;
     public InputField joinInput;
 
-
+    private void Awake()
+    {
+        black = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     public void CreateRoom()
     {
+        black = false;
         PhotonNetwork.CreateRoom(createInput.text);
     }
 
 
 
     public void JoinRoom()
-    {
+    {   black = true;
         PhotonNetwork.JoinRoom(joinInput.text);
     }
     public override void OnJoinedRoom()

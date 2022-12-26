@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PointerFunctions : MonoBehaviour {
+public abstract class PointerFunctions : MonoBehaviour {
 
 	// Use this for initialization
 
 	//this is the circle trigger with the loading effect bar:
 	CircleTrigger loadingScript;
 
-	void Start () 
+	protected virtual void Start () 
 	{
 		loadingScript=GameObject.FindGameObjectWithTag("HUD").GetComponent<CircleTrigger>();
 	}
@@ -29,4 +29,6 @@ public class PointerFunctions : MonoBehaviour {
 	{
 		loadingScript.cancelLoading();
 	}
+	public abstract void MultiplayerOnGazeOver();
+	public abstract void MultiplayerOnGazeExit();
 }
